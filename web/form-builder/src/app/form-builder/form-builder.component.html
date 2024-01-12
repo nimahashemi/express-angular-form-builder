@@ -1,0 +1,165 @@
+<div class="col-md-12">
+  <div class="centered">
+    <h4>{{ form.name }}</h4>
+    <hr />
+    @if(form.fields && form.fields.length > 0) {
+    <form name="form" (ngSubmit)="onSave(this.value)" #f="ngForm" novalidate>
+      <ng-container *ngFor="let field of form.fields">
+        @if(field.type === 'text') {
+        <div class="form-group field-margin">
+          <label for="{{ field.label || field.name }}">{{
+            field.label || field.name
+          }}</label>
+          <input
+            type="text"
+            name="{{ field.name }}"
+            id="{{ field.id || field.name }}"
+            value="{{ field.value }}"
+            required="{{ field.required || false }}"
+            class="form-control"
+          />
+        </div>
+        } @if(field.type === 'password') {
+        <div class="form-group field-margin">
+          <label for="{{ field.label || field.name }}">{{
+            field.label || field.name
+          }}</label>
+          <input
+            type="password"
+            name="{{ field.name }}"
+            id="{{ field.id || field.name }}"
+            required="{{ field.required || false }}"
+            class="form-control"
+          />
+        </div>
+        } @else {
+        <div class="form-group field-margin">
+          <label for="{{ field.label || field.name }}">{{
+            field.label || field.name
+          }}</label>
+          <input
+            type="{{ field.type }}"
+            name="{{ field.name }}"
+            id="{{ field.id || field.name }}"
+            required="{{ field.required || false }}"
+            class="form-control"
+          />
+        </div>
+        }
+      </ng-container>
+      <br />
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Save</button>
+      </div>
+    </form>
+    }
+    <br /><br />Add Field
+    <hr />
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && onAdd()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select
+          class="form-control"
+          name="type"
+          [(ngModel)]="formField.type"
+          required
+        >
+          <option value="text">Text</option>
+          <option value="number">Number</option>
+          <option value="password">Password</option>
+          <option value="Email">Email</option>
+          <option value="date">Date</option>
+          <option value="radio">Radio</option>
+          <option value="checkbox">Checkbox</option>
+          <option value="hidden">Hidden</option>
+          <option value="tel">Tel</option>
+          <option value="time">Time</option>
+          <option value="textarea">Textarea</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          [(ngModel)]="formField.name"
+          required
+          minlength="3"
+          maxlength="20"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input
+          type="text"
+          class="form-control"
+          name="id"
+          [(ngModel)]="formField.id"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="placeholder">Placeholder</label>
+        <input
+          type="text"
+          class="form-control"
+          name="placeholder"
+          [(ngModel)]="formField.placeholder"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="label">Label</label>
+        <input
+          type="text"
+          class="form-control"
+          name="label"
+          [(ngModel)]="formField.label"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="value">Value</label>
+        <input
+          type="text"
+          class="form-control"
+          name="value"
+          [(ngModel)]="formField.value"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="size">Size</label>
+        <input
+          type="text"
+          class="form-control"
+          name="size"
+          [(ngModel)]="formField.size"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="required">Required</label>
+        <select
+          class="form-control"
+          name="required"
+          [(ngModel)]="formField.required"
+        >
+          <option value="true">YES</option>
+          <option value="false">NO</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Add</button>
+      </div>
+    </form>
+  </div>
+</div>

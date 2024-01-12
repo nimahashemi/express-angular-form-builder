@@ -1,0 +1,48 @@
+api/node_modules
+api/service.log
+api/.vscode
+
+web/form-builder/.vscode
+web/form-builder/.vscode
+web/form-builder/node_modules
+
+# Compiled output
+web/form-builder/dist
+web/form-builder/tmp
+web/form-builder/out-tsc
+web/form-builder/bazel-out
+
+# Node
+/node_modules
+web/form-builder/npm-debug.log
+web/form-builder/yarn-error.log
+
+# IDEs and editors
+web/form-builder/.idea/
+web/form-builder/.project
+web/form-builder/.classpath
+web/form-builder/.c9/
+web/form-builder*/.launch
+web/form-builder/.settings/
+web/form-builder/*.sublime-workspace
+
+# Visual Studio Code
+web/form-builder/.vscode/*
+web/form-builder/!.vscode/settings.json
+web/form-builder/!.vscode/tasks.json
+web/form-builder/!.vscode/launch.json
+web/form-builder/!.vscode/extensions.json
+web/form-builder/.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db

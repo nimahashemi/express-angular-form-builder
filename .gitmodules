@@ -1,0 +1,6 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/nimahashemi/express-angular-form-builder.git
+[submodule "web/form-builder"]
+	path = web/form-builder
+	url = https://github.com/nimahashemi/express-angular-form-builder.git

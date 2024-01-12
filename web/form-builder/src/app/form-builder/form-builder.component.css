@@ -1,0 +1,13 @@
+.centered {
+    top: 50px;
+    margin: 0px auto;
+}
+
+.margin {
+    margin-top: 5rem;
+    margin-bottom: 2.5rem;
+}
+
+.field-margin {
+    margin-top: 5px;
+}

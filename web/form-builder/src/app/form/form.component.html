@@ -1,0 +1,107 @@
+<div class="col-md-12">
+  <div class="centered">
+    <img
+      src="../../assets/images/from-builder-banner.jpg"
+      class="profile-img-card rounded img-fluid margin"
+      width="100%"
+      height="60%"
+    />
+    <h2 class="form-list-header">Forms List</h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Method</th>
+          <th scope="col">Status</th>
+          <th scope="col">-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let form of forms; let i = index">
+          <tr>
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ form.name }}</td>
+            <td>{{ form.method }}</td>
+            <td>{{ form.status }}</td>
+            <td><a href="/builder/{{ form._id }}">view</a></td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <br /><br />
+    <h2 class="form-list-header">Add Form</h2>
+    <hr />
+    @if (!isSuccessful) {
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="username">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          [(ngModel)]="form.name"
+          required
+          minlength="3"
+          maxlength="20"
+          #name="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && name.errors }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select
+          class="form-control"
+          name="status"
+          [(ngModel)]="form.status"
+          #status="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && status.errors }"
+        >
+          <option value="ACTIVE">ACTIVE</option>
+          <option value="DELETED">DELETED</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="action">Action</label>
+        <input
+          type="text"
+          class="form-control"
+          name="action"
+          [(ngModel)]="form.action"
+          maxlength="20"
+          #action="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && action.errors }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="method">Method</label>
+        <select
+          class="form-control"
+          name="method"
+          [(ngModel)]="form.method"
+          #method="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && method.errors }"
+        >
+          <option value="POST">POST</option>
+          <option value="GET">GET</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Create Form</button>
+      </div>
+
+      @if (f.submitted && !isSuccessful) {
+      <div class="alert alert-warning">
+        Create form failed!<br />{{ errorMessage }}
+      </div>
+      }
+    </form>
+    }
+  </div>
+</div>

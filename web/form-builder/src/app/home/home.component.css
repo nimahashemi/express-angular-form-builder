@@ -1,0 +1,14 @@
+.centered {
+    color: black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    transform: translate(-50%, -50%);
+}
+
+.centered img {
+    width: 100%;
+    height: 100%;
+}
