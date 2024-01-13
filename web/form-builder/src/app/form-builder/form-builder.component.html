@@ -3,7 +3,19 @@
     <h4>{{ form.name }}</h4>
     <hr />
     @if(form.fields && form.fields.length > 0) {
-    <form name="form" (ngSubmit)="onSave(this.value)" #f="ngForm" novalidate>
+    <form [formGroup]="dynamicForm" (ngSubmit)="onSave()" #f="ngForm" novalidate>
+      <div *ngFor="let field of form.fields">
+        <div class="form-group field-margin">
+          <label>{{ field.label }}</label>
+          <input [type]="field.type" [formControlName]="field.name" class="form-control" />
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Save</button>
+      </div>
+    </form>
+
+    <!-- <form name="form" (ngSubmit)="onSave()" #f="ngForm" novalidate>
       <ng-container *ngFor="let field of form.fields">
         @if(field.type === 'text') {
         <div class="form-group field-margin">
@@ -51,7 +63,7 @@
       <div class="form-group">
         <button class="btn btn-primary btn-block">Save</button>
       </div>
-    </form>
+    </form> -->
     }
     <br /><br />Add Field
     <hr />

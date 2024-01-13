@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrl: './form-builder.component.css'
 })
 export class FormBuilderComponent implements OnInit {
-  dynamicForm: FormGroup | undefined;
+  dynamicForm: FormGroup = this.formBuilder.group({});
   errorMessage = '';
   successMessage = '';
   formId: string = '';
@@ -54,15 +54,15 @@ export class FormBuilderComponent implements OnInit {
   constructor(private formService: FormService, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
   async ngOnInit(): Promise<void> {
-    let formGroup = {};
+    let formGroup: Record<string, any> = {};
     const id = this.route.snapshot.paramMap.get('id')
     if (id) {
       (await this.formService.getFormById(id)).subscribe({
         next: (data: any) => {
           this.formId = id;
           this.form = data;
-          data.fields.forEach((control: { name: string | number; value: any; }) => {
-            // formGroup[control.name] = [control.value || ''];
+          data.fields.forEach((control: { name: string | number | ''; }) => {
+            formGroup[control.name] = [''];
           });
 
           this.dynamicForm = this.formBuilder.group(formGroup);
@@ -116,26 +116,23 @@ export class FormBuilderComponent implements OnInit {
 
 
   // TODO: Must complete (get dynamic data to save in DB, backend is ready)
-  async onSave(value: any) {
-    console.log(value);
-    // console.log(this.dynamicForm.value);
+  async onSave() {
+    console.log(this.dynamicForm.value);
     const fId = this.route.snapshot.paramMap.get('id')
     if (!fId) throw new Error();
 
-    const data: any = new Map();
-    if (this.form && this.form.fields) {
-      for (let i = 0; i < this.form.fields?.length; i += 1) {
-        const field = this.form.fields[i];
-        data.set(field.name, )
-      }
-    }
+    // const data: any = new Map();
+    // if (this.form && this.form.fields) {
+    //   for (let i = 0; i < this.form.fields?.length; i += 1) {
+    //     const field = this.form.fields[i];
+    //     data.set(field.name,)
+    //   }
+    // }
 
 
-    (await this.formService.saveForm(fId, data)).subscribe({
+    (await this.formService.saveForm(fId, this.dynamicForm.value)).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.successMessage = 'Save Form SuccessFull.'
-        this.reloadPage()
       },
       error: (err: { error: { message: string; }; }) => {
         this.errorMessage = err.error.message;
