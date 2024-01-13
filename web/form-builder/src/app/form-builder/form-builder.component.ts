@@ -114,8 +114,6 @@ export class FormBuilderComponent implements OnInit {
     this.reloadPage();
   };
 
-
-  // TODO: Must complete (get dynamic data to save in DB, backend is ready)
   async onSave() {
     console.log(this.dynamicForm.value);
     const fId = this.route.snapshot.paramMap.get('id')
